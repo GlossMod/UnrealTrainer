@@ -1,6 +1,8 @@
-# UE4SSCPPTemplate
+# UnrealTrainer
 
-This repository includes some custom `xmake` tasks to assist in your mod development.
+> for https://github.com/bitonality/UE4SSCPPTemplate
+
+此存储库包含一些自定义的`xmake`任务，以协助您的模组开发。
 
 - `xmake newmod`
 - `xmake installmod`
@@ -9,34 +11,34 @@ This repository includes some custom `xmake` tasks to assist in your mod develop
 
 ## `xmake newmod [-r, --regen] name`
 
-The `newmod` command will ensure you have the UE4SS repository cloned and then bootstrap new mod creation.
+`newmod`命令将确保您已经克隆了UE4SS存储库，然后引导新模组的创建。
 
-Running `xmake newmod CoolMod` will generate `/Mods/CoolMod/...` in your repository and automatically link it with the xmake system. If you have VS2022 installed then the `newmod` command will also automatically generate a VS project which can be located at `/vsxmake2022/UE4SSCppTemplate.sln`.
+运行`xmake newmod CoolMod`将在您的存储库中生成`/Mods/CoolMod/...`，并自动将其与xmake系统链接。如果您安装了VS2022，则`newmod`命令还将自动生成一个VS项目，该项目可以位于`/vsxmake2022/UE4SSCppTemplate.sln`。
 
 ## `xmake installmod [-d, --exedir] name`
 
-The `installmod` command will copy your build output to a specific game directory. The configuration of the build you want to install is derived from the currently configured xmake mode (`xmake f -m <mode>`). This configured mode is global to the `RE-UE4SS` repo and all the mods in the `Mods` folder. If you want to specify a specific configuration to install, then you can change the xmake configuration by running `xmake f -m "Game__Debug__Win64"`.
+`installmod`命令将您的构建输出复制到特定的游戏目录。要安装的构建配置是从当前配置的xmake模式(`xmake f -m <mode>`)派生出来的。这个配置模式是全局的，适用于`RE-UE4SS`存储库和`Mods`文件夹中的所有模组。如果您想指定要安装的特定配置，那么您可以通过运行`xmake f -m "Game__Debug__Win64"`来更改xmake配置。
 
-Running `xmake installmod --exedir="Path\To\Your\Game\Dir" CoolMod` will copy the build output and install `CoolMod` in the correct subdir in the game's mod folder.
+运行`xmake installmod --exedir="Path\To\Your\Game\Dir" CoolMod`将复制构建输出并在游戏的模组文件夹中正确安装`CoolMod`。
 
-Note that running `xmake installmod` does not automatically build your mod. You have to manually build it with `xmake build` or use the `xmake bi` task to build and install your mod.
+注意，运行`xmake installmod`不会自动构建您的模组。您必须手动构建它，使用`xmake build`，或者使用`xmake bi`任务来构建并安装您的模组。
 
 ## `xmake bi [-d, --exedir] name`
 
-This is a shorthand task that will run `xmake build -y <modname>` followed by the `xmake installmod` command. This one-liner command facilitates rapid testing/iterating of your mod.
+这是一个简写任务，它将运行`xmake build -y <modname>`，然后是`xmake installmod`命令。这个一行命令便于快速测试/迭代您的模组。
 
 ## `xmake ue4ss [-r, --remote] [-u, --update]`
 
-By default, the `xmake newmod` command will attempt to checkout the latest release tag of UE4SS to build your mods against. If you want to build your mods against a different remote then you can specify a branch or tag as the `--remote=` parameter.
+默认情况下，`xmake newmod`命令将尝试检出UE4SS的最新发布标签，以便构建您的模组。如果您想构建您的模组对应不同的远程，那么您可以指定一个分支或标签作为`--remote=`参数。
 
-`xmake ue4ss --remote="v3.1.0"` will attempt to use tag "v3.1.0" as the checked out UE4SS version.
+`xmake ue4ss --remote="v3.1.0"`将尝试使用标签"v3.1.0"作为检出的UE4SS版本。
 
-You can use the latest release tag by specifying `xmake ue4ss --remote="latest"`.
+您可以使用最新的发布标签，通过指定`xmake ue4ss --remote="latest"`。
 
-You can also specify branches instead of tags to use. `xmake ue4ss --remote=main` will checkout the `main` branch of UE4SS.
+您也可以指定要使用的分支而不是标签。`xmake ue4ss --remote=main`将检出UE4SS的`main`分支。
 
-If you want to get upstream changes from remote branches then you can use the `--update` arg to pull remote changes.
+如果您想从远程分支获取上游更改，那么您可以使用`--update`参数来拉取远程更改。
 
-`xmake ue4ss --remote=main --update` will pull the latest remote changes from the `main` branch locally.
+`xmake ue4ss --remote=main --update`将从`main`分支本地拉取最新的远程更改。
 
-You can also run `xmake ue4ss --update` and xmake will try to pull changes from whatever branch your local UE4SS is currently on.
+您也可以运行`xmake ue4ss --update`，xmake将尝试从您的本地UE4SS当前所在的分支拉取更改。
