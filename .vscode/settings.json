@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "*.json5": "jsonc",
+        "string_view": "cpp"
+    }
+}
