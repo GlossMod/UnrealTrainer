@@ -1,6 +1,7 @@
 # UnrealTrainer
 
-> for https://github.com/bitonality/UE4SSCPPTemplate
+> for https://github.com/bitonality/UE4SSCPPTemplate  
+> 文档: https://docs.ue4ss.com/dev/guides/creating-a-c++-mod.html
 
 此存储库包含一些自定义的`xmake`任务，以协助您的模组开发。
 
