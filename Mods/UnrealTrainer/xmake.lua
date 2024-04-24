@@ -1,5 +1,7 @@
 local projectName = "UnrealTrainer"
 
+add_requires("minhook")
+
 target(projectName)
     set_kind("shared")
     set_languages("cxx20")
@@ -7,9 +9,11 @@ target(projectName)
 
     add_includedirs(".")
 
-    add_files("dllmain.cpp")
+    add_files("**.cpp")
 
     add_deps("UE4SS")
+
+    add_packages("minhook")
 
     on_load(function (target)
         import("build_configs", { rootdir = get_config("scriptsRoot") })
