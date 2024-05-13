@@ -1,4 +1,5 @@
 ﻿#include "MainWindow.h"
+#include "./hook/hook.h"
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -19,7 +20,7 @@ void InitImGui()
 
     // io.Fonts->AddFontDefault();
     // 处理 中文字体 问题
-    io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 16.0f, nullptr, io.Fonts->GetGlyphRangesChineseFull());
+    io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 14.0f, nullptr, io.Fonts->GetGlyphRangesChineseFull());
 
     // IM_ASSERT(font != nullptr);
 }
@@ -54,6 +55,15 @@ void showImgui()
         counter++;
     ImGui::SameLine();
     ImGui::Text("counter = %d", counter);
+
+    if (ImGui::Button("注入Hook!"))
+    {
+        // print_r(STR("Hello, world!"));
+        // 打印到控制台
+        // Output::send<LogLevel::Info>(STR("Hello, world!"));
+        init_hook();
+        printf("Hello, world!\n");
+    }
 
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
     //  ImGui::End();
