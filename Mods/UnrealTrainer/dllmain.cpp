@@ -1,22 +1,9 @@
 #include <stdio.h>
-#include <string>
 #include <Mod/CppUserModBase.hpp>
-#include <UE4SSProgram.hpp>
-#include <Unreal/UObjectGlobals.hpp>
-#include <Unreal/UObject.hpp>
-#include <DynamicOutput/DynamicOutput.hpp>
 
-#include <Unreal/ReflectedFunction.hpp>
-#include <Unreal/GameplayStatics.hpp>
-#include <Unreal/Hooks.hpp>
-#include <Unreal/World.hpp>
-#include <Input/Handler.hpp>
-#include "./GUI/MainWindow.h"
-
-#include <Windows.h>
+#include "GUI/MainWindow.h"
 
 using namespace RC;
-using namespace RC::Input;
 using namespace RC::Unreal;
 
 class UnrealTrainer : public CppUserModBase
