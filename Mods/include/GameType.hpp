@@ -1,0 +1,77 @@
+#pragma once
+
+typedef unsigned long long uint64;
+typedef signed int int32;
+typedef signed long long int64;
+typedef unsigned char uint8;
+
+struct FCharactorInfo
+{
+    void *FirstName;         // 0x0000 (size: 0x8)
+    void *LastName;          // 0x0008 (size: 0x8)
+    void *NameIDs;           // 0x0010 (size: 0x10)
+    uint8 *Gender;           // 0x0020 (size: 0x1)
+    int32 *BodyIndex;        // 0x0024 (size: 0x4)
+    int32 *Face;             // 0x0028 (size: 0x4)
+    int32 *Hair;             // 0x002C (size: 0x4)
+    int32 *HairBehind;       // 0x0030 (size: 0x4)
+    void *HairColor;         // 0x0034 (size: 0x10)
+    int32 *Makeup;           // 0x0044 (size: 0x4)
+    int32 *EyeBrown;         // 0x0048 (size: 0x4)
+    int32 *Eye;              // 0x004C (size: 0x4)
+    int32 *Nose;             // 0x0050 (size: 0x4)
+    int32 *Mouth;            // 0x0054 (size: 0x4)
+    int32 *EyeMakeup;        // 0x0058 (size: 0x4)
+    int32 *Bread;            // 0x005C (size: 0x4)
+    int32 *BreadColor;       // 0x0060 (size: 0x4)
+    int32 *ClothColor;       // 0x0064 (size: 0x4)
+    int32 *PresetAppearance; // 0x0068 (size: 0x4)
+    int32 *MaxLife;          // 0x006C (size: 0x4)
+    int32 *CurLife;          // 0x0070 (size: 0x4)
+    int32 *CurDay;           // 0x0074 (size: 0x4)
+    int32 *Luck;             // 0x0078 (size: 0x4)
+    void *EffectScale;       // 0x0080 (size: 0x18)
+};
+
+struct FRPGAttributeBase
+{
+    int32 *RPGIndexID;                   // 0x0008 (size: 0x4)
+    int32 *BigWorldInsightSize;          // 玩家视野 0x000C (size: 0x4)
+    void *CoordinatePositon;             // 坐标位置 0x0010 (size: 0x8)
+    FCharactorInfo *CharactorInfomation; // 角色信息 0x0018 (size: 0x98)
+    void *FightAttribute;                // Fight 属性 0x00B0 (size: 0x1A8)
+    void *BattleAttribute;               // Battle 属性 0x0258 (size: 0xB8)
+    void *ZhongmenJobAttribute;          // 宗门任务属性 0x0310 (size: 0x14)
+    int32 *CityID;                       // 城市ID 0x0324 (size: 0x4)
+    void *OldOrganizations;              // 0x0328 (size: 0x10)
+    void *StageBreakTime;                // 0x0338 (size: 0x50)
+    void *SocialAttribute;               // 0x0388 (size: 0x3A0)
+    void *PlayerBag;                     // 玩家背包 0x0728 (size: 0x18)
+    void *EquipedPassive;                // 装备被动 0x0740 (size: 0x10)
+    void *HidePassive;                   // 隐藏被动 0x0750 (size: 0x10)
+    void *TempleEquipedPassive;          // 0x0760 (size: 0x10)
+    void *EquipedSkill;                  // 0x0770 (size: 0x50)
+    void *XinjueInRunState;              // 0x07C0 (size: 0x50)
+    int32 *SLoopNum;                     // 循环次数 0x0810 (size: 0x4)
+    int32 *BLoopNum;                     // 循环次数 0x0814 (size: 0x4)
+    int64 *LingShi;                      // 灵石数量 0x0818 (size: 0x8)
+    int64 *SkyGold;                      // 0x0820 (size: 0x8)
+    int64 *ZongMenFamePoint;             // 宗门声望 0x0828 (size: 0x8)
+    int64 *AvailableZongMenJobSalary;    // 宗门工资 0x0830 (size: 0x8)
+    void *JiYiInfo;                      // 记忆信息 0x0838 (size: 0x100)
+    void *LearnedFuLu;                   // 学习附录 0x0938 (size: 0x10)
+    void *PlayerFuLuBag;                 // 玩家fulu背包 0x0948 (size: 0x18)
+    int32 *NPCStoreID;                   // NPC商店ID 0x0960 (size: 0x4)
+    void *StoreBag;                      // 背包 0x0968 (size: 0x18)
+    void *EntiyIndex;                    // 存档索引 0x0980 (size: 0x18)
+    int32 *CurrentBD;                    // 0x0998 (size: 0x4)
+    bool *CurrentBDComplete;             // 0x099C (size: 0x1)
+    void *BDList;                        // 0x09A0 (size: 0x10)
+    void *RelationshipVertex;            // 0x09B0 (size: 0x8)
+    void *LingFaExpList;                 // 0x09B8 (size: 0x50)
+    void *DieAfterQuest;                 // 0x0A08 (size: 0x10)
+    void *PersonLifeRecords;             // 0x0A18 (size: 0x10)
+    void *KnownItems;                    // 已知项目 0x0A28 (size: 0x10)
+    void *KnownLingfa;                   // 已知灵法 0x0A38 (size: 0x10)
+    void *KnownEnemy;                    // 已知敌人 0x0A48 (size: 0x10)
+};

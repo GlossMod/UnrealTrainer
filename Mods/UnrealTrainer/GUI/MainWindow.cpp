@@ -1,5 +1,4 @@
 ﻿#include "MainWindow.h"
-#include "./hook/hook.h"
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -21,8 +20,6 @@ void InitImGui()
     // io.Fonts->AddFontDefault();
     // 处理 中文字体 问题
     io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 14.0f, nullptr, io.Fonts->GetGlyphRangesChineseFull());
-
-    // IM_ASSERT(font != nullptr);
 }
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -34,9 +31,28 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
     return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
 
-bool show_demo_window = true;
-bool show_another_window = false;
-ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+void PlayerInfo()
+{
+    if (ImGui::TreeNode("玩家信息"))
+    {
+
+        // FCharactorInfo *CharactorInfomation = MyFNGameBase.CharactorInfomation;
+        // CharactorInfomation->FirstName = (void *)((uintptr_t)MyFNGameBase.CharactorInfomation + 0x0);
+        // CharactorInfomation->LastName = (void *)((uintptr_t)MyFNGameBase.CharactorInfomation + 0x8);
+        // ImGui::Text("玩家名称 %s %s", (char *)CharactorInfomation->FirstName, (char *)CharactorInfomation->LastName);
+
+        ImGui::InputInt("玩家灵石", (int *)MyFNGameBase.LingShi, 100);
+        ImGui::InputInt("宗门贡献", (int *)MyFNGameBase.ZongMenFamePoint, 100);
+        ImGui::InputInt("宗门薪资", (int *)MyFNGameBase.AvailableZongMenJobSalary, 100);
+        ImGui::InputInt("天空金", (int *)MyFNGameBase.SkyGold, 100);
+        ImGui::InputInt("视野大小", (int *)MyFNGameBase.BigWorldInsightSize, 10);
+
+        ImGui::Text("玩家坐标: %p", MyFNGameBase.CoordinatePositon);
+
+        ImGui::TreePop();
+        ImGui::Spacing();
+    }
+}
 
 void showImgui()
 {
@@ -44,43 +60,16 @@ void showImgui()
     static float f = 0.0f;
     ImGuiIO &io = ImGui::GetIO();
 
-    ImGui::Text("中文测试.");                          // Display some text (you can use a format strings too)
-    ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
-    ImGui::Checkbox("Another Window", &show_another_window);
-
-    ImGui::SliderFloat("float", &f, 0.0f, 1.0f);             // Edit 1 float using a slider from 0.0f to 1.0f
-    ImGui::ColorEdit3("clear color", (float *)&clear_color); // Edit 3 floats representing a color
-
-    if (ImGui::Button("Button")) // Buttons return true when clicked (most widgets return true when edited/activated)
-        counter++;
-    ImGui::SameLine();
-    ImGui::Text("counter = %d", counter);
-
-    if (ImGui::Button("注入Hook!"))
+    if (MyFNGameBase.LingShi)
     {
-        // print_r(STR("Hello, world!"));
-        // 打印到控制台
-        // Output::send<LogLevel::Info>(STR("Hello, world!"));
-        init_hook();
-        printf("Hello, world!\n");
+        PlayerInfo();
+    }
+    else
+    {
+        ImGui::Text("等待进入存档");
     }
 
-    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-    //  ImGui::End();
-
-    if (show_another_window)
-    {
-        ImGui::Begin("Another Window", &show_another_window); // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-        ImGui::Text("Hello from another window!");
-        if (ImGui::Button("Close Me"))
-            show_another_window = false;
-        ImGui::End();
-    }
-
-    if (show_demo_window)
-    {
-        ImGui::ShowDemoWindow(&show_demo_window);
-    }
+    ImGui::Text("延迟 %.3f ms/frame (%.2f FPS)", 1000.0f / io.Framerate, io.Framerate);
 }
 
 // Our state
@@ -101,6 +90,8 @@ HRESULT __stdcall hkPresent(IDXGISwapChain *pSwapChain, UINT SyncInterval, UINT 
             pBackBuffer->Release();
             oWndProc = (WNDPROC)SetWindowLongPtr(window, GWLP_WNDPROC, (LONG_PTR)WndProc);
             InitImGui();
+            init_hook();
+
             init = true;
         }
 
