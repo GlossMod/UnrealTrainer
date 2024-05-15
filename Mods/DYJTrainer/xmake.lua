@@ -1,4 +1,4 @@
-local projectName = "UnrealTrainer"
+local projectName = "DYJTrainer"
 
 add_requires("minhook")
 
@@ -14,7 +14,12 @@ target(projectName)
     add_deps("UE4SS")
 
     add_packages("minhook")
+    add_defines("NOMINMAX")  -- 添加 NOMINMAX 定义
 
+    -- 配置 include
+    add_includedirs("include")
+
+    
     on_load(function (target)
         import("build_configs", { rootdir = get_config("scriptsRoot") })
         build_configs:set_output_dir(target)

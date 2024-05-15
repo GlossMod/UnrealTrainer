@@ -6,19 +6,19 @@
 using namespace RC;
 using namespace RC::Unreal;
 
-class UnrealTrainer : public CppUserModBase
+class DYJTrainer : public CppUserModBase
 {
 private:
 public:
-    UnrealTrainer() : CppUserModBase()
+    DYJTrainer() : CppUserModBase()
     {
-        ModName = STR("UnrealTrainer");
+        ModName = STR("DYJTrainer");
         ModVersion = STR("1.0");
-        ModDescription = STR("Unreal Trainer");
-        ModAuthors = STR("Xiaom");
+        ModDescription = STR("DYJTrainer");
+        ModAuthors = STR("小莫");
     }
 
-    ~UnrealTrainer() override
+    ~DYJTrainer() override
     {
     }
 
@@ -37,7 +37,7 @@ extern "C"
 {
     MY_AWESOME_MOD_API RC::CppUserModBase *start_mod()
     {
-        return new UnrealTrainer();
+        return new DYJTrainer();
     }
 
     MY_AWESOME_MOD_API void uninstall_mod(RC::CppUserModBase *mod)

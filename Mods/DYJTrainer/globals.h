@@ -3,4 +3,4 @@
 
 #include <GameType.hpp>
 
-extern FRPGAttributeBase MyFNGameBase;
+extern FRPGAttributeBase *MyFNGameBase;

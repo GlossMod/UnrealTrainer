@@ -33,20 +33,24 @@
     .text:0000000141E091A7 48 8B E9                                            mov     rbp, this
 */
 
-FRPGAttributeBase MyFNGameBase;
+FRPGAttributeBase *MyFNGameBase;
 
-void *(*originalFunction)(void *, const void *);
+void *(*originalFunction)(void *, void *);
 
-void *hookFunction(void *this_, const void *that)
+void *hookFunction(void *this_, void *that)
 {
-    MyFNGameBase = *(FRPGAttributeBase *)that;
-    MyFNGameBase.BigWorldInsightSize = (int32 *)((uintptr_t)that + 0xC);
-    MyFNGameBase.CoordinatePositon = (void *)((uintptr_t)that + 0x10);
-    MyFNGameBase.PlayerBag = (void *)((uintptr_t)that + 0x728);
-    MyFNGameBase.LingShi = (int64 *)((uintptr_t)that + 0x818);
-    MyFNGameBase.SkyGold = (int64 *)((uintptr_t)that + 0x820);
-    MyFNGameBase.ZongMenFamePoint = (int64 *)((uintptr_t)that + 0x828);
-    MyFNGameBase.AvailableZongMenJobSalary = (int64 *)((uintptr_t)that + 0x830);
+    // 从 that 读取角色相关数据
+    MyFNGameBase = reinterpret_cast<FRPGAttributeBase *>(that);
+    // MyFNGameBase.BigWorldInsightSize = (int32 *)((uintptr_t)that + 0xC);
+    // MyFNGameBase.CoordinatePositon = (void *)((uintptr_t)that + 0x10);
+    // MyFNGameBase.CharactorInfomation = (FCharactorInfo *)((uintptr_t)that + 0x18);
+    // MyFNGameBase.FightAttribute = (FFightAttribute *)((uintptr_t)that + 0xB0);
+    // MyFNGameBase.BattleAttribute = (FBattleAttribute *)((uintptr_t)that + 0x258);
+    // MyFNGameBase.PlayerBag = (void *)((uintptr_t)that + 0x728);
+    // MyFNGameBase.LingShi = (int64 *)((uintptr_t)that + 0x818);
+    // MyFNGameBase.SkyGold = (int64 *)((uintptr_t)that + 0x820);
+    // MyFNGameBase.ZongMenFamePoint = (int64 *)((uintptr_t)that + 0x828);
+    // MyFNGameBase.AvailableZongMenJobSalary = (int64 *)((uintptr_t)that + 0x830);
 
     return originalFunction(this_, that);
 }
