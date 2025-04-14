@@ -1,8 +1,14 @@
-#include <stdio.h>
-#include <Mod/CppUserModBase.hpp>
+
+#include "main.h"
+#include <UE4SSProgram.hpp>
 
 class InZOI : public RC::CppUserModBase
 {
+private:
+    int m_private_number{33};
+    std::shared_ptr<GUI::GUITab> m_less_safe_tab{};
+    bool show_demo_window = false;
+
 public:
     InZOI() : CppUserModBase()
     {
@@ -19,6 +25,8 @@ public:
 
     ~InZOI() override
     {
+        // printf("InZOI says goodbye\n");
+        d3d12hook::release();
     }
 
     auto on_update() -> void override
@@ -26,7 +34,9 @@ public:
     }
     auto on_unreal_init() -> void override
     {
-        Output::send<LogLevel::Verbose>(STR("InZOI says hello\n"));
+        // Output::send<LogLevel::Verbose>(STR("InZOI says hello\n"));
+
+        hookToGame();
     }
 };
 

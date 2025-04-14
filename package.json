@@ -1,0 +1,12 @@
+{
+    "name": "yog-sothoths-yard",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build and install": "xmake bi \"D:\\SteamLibrary\\steamapps\\common\\inZOI\\BlueClient\\Binaries\\Win64\\ue4ss\" InZOI",
+        "build": "xmake"
+    },
+    "author": "小莫",
+    "license": "ISC"
+}
